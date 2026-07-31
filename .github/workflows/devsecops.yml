@@ -63,20 +63,6 @@ jobs:
           name: service-jars
           path: backend-jars
 
-      - name: SonarQube scan — Backend
-        run: |
-          mvn sonar:sonar \
-            -Dsonar.projectKey=devboard-backend \
-            -Dsonar.projectName="DevBoard Backend" \
-            -Dsonar.sources=. \
-            -Dsonar.java.binaries=**/target/classes \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
-            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
-        working-directory: backend
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -87,17 +73,17 @@ jobs:
         run: npm ci
         working-directory: frontend
 
-      - name: SonarQube scan — Frontend
+      - name: SonarQube scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
-          projectBaseDir: frontend
           args: >
-            -Dsonar.projectKey=devboard-frontend
-            -Dsonar.projectName="DevBoard Frontend"
-            -Dsonar.sources=src
+            -Dsonar.projectKey=ketanakakde
+            -Dsonar.projectName=devboard
+            -Dsonar.sources=backend,frontend/src
+            -Dsonar.java.binaries=backend/**/target/classes
 
   snyk:
     name: Snyk — Dependency Scan
