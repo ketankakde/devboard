@@ -1,0 +1,4 @@
+# Add CVE IDs here to suppress known false positives or accepted risks.
+# Format: one CVE per line
+# Example:
+# CVE-2023-XXXXX

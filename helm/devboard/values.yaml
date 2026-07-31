@@ -1,0 +1,85 @@
+global:
+  imageRegistry: ""
+  imageTag: "latest"
+  imagePullPolicy: Always
+
+mongodb:
+  uri: ""
+
+auth:
+  jwtSecret: ""
+  replicaCount: 1
+  image:
+    repository: devboard-auth-service
+  service:
+    port: 8081
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "384Mi"
+      cpu: "500m"
+
+project:
+  replicaCount: 1
+  image:
+    repository: devboard-project-service
+  service:
+    port: 8082
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "384Mi"
+      cpu: "500m"
+
+task:
+  replicaCount: 1
+  image:
+    repository: devboard-task-service
+  service:
+    port: 8083
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "384Mi"
+      cpu: "500m"
+
+gateway:
+  replicaCount: 1
+  image:
+    repository: devboard-api-gateway
+  service:
+    port: 8080
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "384Mi"
+      cpu: "500m"
+
+frontend:
+  replicaCount: 1
+  image:
+    repository: devboard-frontend
+  service:
+    port: 80
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "50m"
+    limits:
+      memory: "128Mi"
+      cpu: "200m"
+
+ingress:
+  enabled: true
+  className: "nginx"
+  host: "devboard.example.com"
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"

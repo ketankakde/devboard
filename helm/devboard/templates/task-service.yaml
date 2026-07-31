@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-service
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: task-service
+    {{ include "devboard.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.task.replicaCount }}
+  selector:
+    matchLabels:
+      app: task-service
+  template:
+    metadata:
+      labels:
+        app: task-service
+    spec:
+      containers:
+        - name: task-service
+          image: {{ include "devboard.image" (dict "root" . "repo" .Values.task.image.repository) }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.task.service.port }}
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: devboard-secrets
+                  key: mongo-uri
+            - name: AUTH_URL
+              value: "http://auth-service:{{ .Values.auth.service.port }}"
+            - name: PROJECT_URL
+              value: "http://project-service:{{ .Values.project.service.port }}"
+          resources:
+            {{ toYaml .Values.task.resources | nindent 12 }}
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: {{ .Values.task.service.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: {{ .Values.task.service.port }}
+            initialDelaySeconds: 60
+            periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    app: task-service
+  ports:
+    - port: {{ .Values.task.service.port }}
+      targetPort: {{ .Values.task.service.port }}

@@ -1,0 +1,8 @@
+com/devboard/auth/ApiKeyRepository.class
+com/devboard/auth/User.class
+com/devboard/auth/AuthController$Login.class
+com/devboard/auth/UserRepository.class
+com/devboard/auth/AuthController.class
+com/devboard/auth/AuthApplication.class
+com/devboard/auth/ApiKey.class
+com/devboard/auth/AuthController$Register.class

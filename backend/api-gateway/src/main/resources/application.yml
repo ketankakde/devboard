@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOriginPatterns: "*"
+                allowedMethods: "GET,POST,PUT,DELETE,OPTIONS"
+                allowedHeaders: "Authorization,X-API-Key,Content-Type"
+                maxAge: 3600
+
+      routes:
+        # More-specific /projects/*/tasks MUST come before /projects/**
+
+        - id: project-tasks
+          uri: ${TASK_URL:http://localhost:8083}
+          predicates:
+            - Path=/projects/*/tasks, /projects/*/tasks/**
+
+        - id: tasks
+          uri: ${TASK_URL:http://localhost:8083}
+          predicates:
+            - Path=/tasks/**
+
+        - id: projects
+          uri: ${PROJECT_URL:http://localhost:8082}
+          predicates:
+            - Path=/projects/**
+
+        - id: auth
+          uri: ${AUTH_URL:http://localhost:8081}
+          predicates:
+            - Path=/auth/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info

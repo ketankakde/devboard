@@ -1,0 +1,14 @@
+{
+  "info": { "name": "DevBoard API", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "variable": [{"key":"baseUrl","value":"http://localhost:8080"},{"key":"jwt","value":""},{"key":"apiKey","value":""}],
+  "item": [
+    {"name":"Register","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":"{{baseUrl}}/auth/register","body":{"mode":"raw","raw":"{\n  \"name\": \"Ada\",\n  \"email\": \"ada@example.com\",\n  \"password\": \"password123\"\n}"}}},
+    {"name":"Login","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":"{{baseUrl}}/auth/login","body":{"mode":"raw","raw":"{\"email\":\"ada@example.com\",\"password\":\"password123\"}"}}},
+    {"name":"Create API key","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{jwt}}"}],"url":"{{baseUrl}}/auth/api-key"}},
+    {"name":"Projects","item":[
+      {"name":"Create","request":{"method":"POST","header":[{"key":"X-API-Key","value":"{{apiKey}}"},{"key":"Content-Type","value":"application/json"}],"url":"{{baseUrl}}/projects","body":{"mode":"raw","raw":"{\"title\":\"Launch\",\"description\":\"Q3 work\"}"}}},
+      {"name":"List","request":{"method":"GET","header":[{"key":"X-API-Key","value":"{{apiKey}}"}],"url":"{{baseUrl}}/projects"}}
+    ]},
+    {"name":"Tasks","request":{"method":"POST","header":[{"key":"X-API-Key","value":"{{apiKey}}"},{"key":"Content-Type","value":"application/json"}],"url":"{{baseUrl}}/projects/1/tasks","body":{"mode":"raw","raw":"{\"title\":\"Design API\",\"priority\":\"HIGH\"}"}}}
+  ]
+}

@@ -1,0 +1,11 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: project-service
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/devboard}
+app:
+  auth-url: ${AUTH_URL:http://localhost:8081}
+  task-url: ${TASK_URL:http://localhost:8083}

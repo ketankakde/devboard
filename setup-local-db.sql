@@ -1,0 +1,16 @@
+-- MongoDB does not require pre-creation of databases or users for local dev.
+-- Spring Boot with spring-boot-starter-data-mongodb will connect to:
+--
+--   mongodb://localhost:27017/devboard
+--
+-- MongoDB creates the database automatically on first write.
+--
+-- If you want to run MongoDB locally (without Docker) and need auth, create
+-- the root user once:
+--
+--   mongosh
+--   use admin
+--   db.createUser({ user: "root", pwd: "devboard-root", roles: ["root"] })
+--
+-- For local dev with docker-compose.infra.yml (no auth), the default URI
+-- mongodb://localhost:27017/devboard works with no credentials.

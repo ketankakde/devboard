@@ -1,0 +1,8 @@
+com/devboard/task/Status.class
+com/devboard/task/TaskRepo.class
+com/devboard/task/Priority.class
+com/devboard/task/TaskController$Update.class
+com/devboard/task/TaskController.class
+com/devboard/task/Task.class
+com/devboard/task/TaskApplication.class
+com/devboard/task/TaskController$Create.class

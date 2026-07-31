@@ -1,0 +1,1 @@
+package com.devboard.task; import org.springframework.boot.*; import org.springframework.boot.autoconfigure.*; @SpringBootApplication public class TaskApplication {public static void main(String[]a){SpringApplication.run(TaskApplication.class,a);}}

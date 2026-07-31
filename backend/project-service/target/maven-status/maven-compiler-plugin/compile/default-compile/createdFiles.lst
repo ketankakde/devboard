@@ -1,0 +1,9 @@
+com/devboard/project/ProjectController$Update.class
+com/devboard/project/Project.class
+com/devboard/project/ProjectController.class
+com/devboard/project/Collaborator.class
+com/devboard/project/CollaboratorRepo.class
+com/devboard/project/ProjectController$Input.class
+com/devboard/project/ProjectRepo.class
+com/devboard/project/ProjectApplication.class
+com/devboard/project/ProjectController$CollaboratorInput.class
