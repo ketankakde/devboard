@@ -111,16 +111,16 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Snyk — Backend (Maven)
-        run: snyk test --all-projects --severity-threshold=high --file=pom.xml
+        run: snyk test --all-projects --severity-threshold=high
         working-directory: backend
 
       - name: Snyk — Frontend (npm)
-        run: snyk test --severity-threshold=high --file=package.json
+        run: snyk test --severity-threshold=high
         working-directory: frontend
 
       - name: Snyk — Monitor backend
         if: github.ref == 'refs/heads/main'
-        run: snyk monitor --all-projects --file=pom.xml
+        run: snyk monitor --all-projects
         working-directory: backend
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
