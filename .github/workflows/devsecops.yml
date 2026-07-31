@@ -80,7 +80,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
-            -Dsonar.projectKey=ketanakakde
+            -Dsonar.projectKey=ketankakde
             -Dsonar.projectName=devboard
             -Dsonar.sources=backend,frontend/src
             -Dsonar.java.binaries=backend/**/target/classes
