@@ -23,11 +23,13 @@ spec:
           ports:
             - containerPort: {{ .Values.auth.service.port }}
           env:
-            - name: MONGO_URI
+            - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: devboard-secrets
-                  key: mongo-uri
+                  key: mongo-root-password
+            - name: MONGO_URI
+              value: "mongodb://root:$(MONGO_INITDB_ROOT_PASSWORD)@mongodb:27017/devboard?authSource=admin"
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:

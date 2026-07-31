@@ -4,7 +4,9 @@ global:
   imagePullPolicy: Always
 
 mongodb:
-  uri: ""
+  rootPassword: ""
+  storage: "1Gi"
+  storageClassName: "gp2"
 
 auth:
   jwtSecret: ""
